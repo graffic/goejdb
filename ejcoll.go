@@ -121,7 +121,7 @@ func (coll *EjColl) Update(query string, queries ...string) (int, *EjdbError) {
 
     orqueries := C.malloc(C.size_t(unsafe.Sizeof(C.bson{})) * C.size_t(len(queries)))
     defer C.free(orqueries)
-    ptr_orqueries := (*[maxslice]C.bson)(orqueries)
+    ptr_orqueries := (*[maxslice / unsafe.Sizeof(C.bson{})]C.bson)(orqueries)
     for i, q := range queries {
         bson := bson_from_json(q)
         (*ptr_orqueries)[i] = *bson

@@ -62,7 +62,7 @@ const (
     JBEMAXNUMCOLS = C.JBEMAXNUMCOLS
 )
 
-const maxslice = 1<<31 - 1
+const maxslice = 0x7FFFFFFF
 
 // An EJDB database
 type Ejdb struct {
