@@ -97,6 +97,17 @@ func TestGetColl(t *testing.T) {
 	}
 }
 
+func TestGetCollWrongColl(t *testing.T) {
+	ejdb := open()
+	coll, err := ejdb.GetColl("NonExistent")
+	if coll != nil {
+		t.Error("GetColl() should return nil coll ")
+	}
+	if err == nil {
+		t.Error("GetColl() should return an error")
+	}
+}
+
 func TestGetColls(t *testing.T) {
 	ejdb := open()
 	ejdb.CreateColl("MyNewColl", nil)
