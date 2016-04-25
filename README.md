@@ -1,6 +1,13 @@
 EJDB Go binding [![Build Status](https://travis-ci.org/mkilling/goejdb.png?branch=master)](https://travis-ci.org/mkilling/goejdb)
 ==================================
 
+Changes from mkilling source
+---------------------------------
+
+* Builds on ARM devices
+* GetColl returns `nil` when the collection doesn't exist 
+
+
 One snippet intro
 -----------------------------------
 
