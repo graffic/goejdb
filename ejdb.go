@@ -164,7 +164,14 @@ func (ejdb *Ejdb) GetColl(colname string) (*EjColl, *EjdbError) {
     ejcoll.ejdb = ejdb
     ejcoll.ptr = (*[0]byte)(unsafe.Pointer(C.ejdbgetcoll((*C.struct_EJDB)(unsafe.Pointer(ejdb.ptr)), c_colname)))
 
-    return ejcoll, ejdb.check_error()
+    if ejcoll.ptr == nil {
+        currentError := ejdb.check_error()
+        if currentError == nil {
+            currentError = &EjdbError{9000, errors.New("No such collection")}
+        }
+        return nil, currentError
+    }
+    return ejcoll, nil
 }
 
 // Return a slice containing shallow copies of all collection handles (EjColl) currently open.
